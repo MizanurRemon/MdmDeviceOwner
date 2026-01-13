@@ -1,3 +1,5 @@
+import java.security.MessageDigest
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -20,6 +22,15 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs{
+        create("release"){
+            storeFile = file("../keystore/keystore.jks")
+            storePassword = "123456"
+            keyAlias = "key0"
+            keyPassword = "123456"
+        }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -27,6 +38,8 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = signingConfigs.getByName("release")
+
         }
     }
     compileOptions {
@@ -60,4 +73,44 @@ dependencies {
 
     implementation("androidx.enterprise:enterprise-feedback:1.1.0")
 
+}
+
+// Task to generate SHA-256 for release APK
+        tasks.register("generateReleaseApkSha256") {
+            group = "distribution"
+            description = "Generate SHA-256 checksum for signed release APK"
+
+            doLast {
+                val apkDir = file("$buildDir/outputs/apk/release")
+                val apkFile = apkDir.listFiles()?.find { it.name.endsWith(".apk") }
+
+                if (apkFile == null) {
+                    throw GradleException("❌ Release APK not found. Build release first.")
+                }
+
+                val digest = MessageDigest.getInstance("SHA-256")
+                apkFile.inputStream().use { input ->
+                    val buffer = ByteArray(8192)
+                    var read: Int
+                    while (input.read(buffer).also { read = it } != -1) {
+                        digest.update(buffer, 0, read)
+                    }
+                }
+
+                val sha256 = digest.digest()
+                    .joinToString("") { String.format("%02x", it) }
+
+                val outFile = File(apkDir, "${apkFile.name}.sha256")
+                outFile.writeText(sha256)
+
+                println("✅ SHA-256 generated: $sha256")
+                println("File saved at: ${outFile.absolutePath}")
+            }
+        }
+
+// Automatically run SHA-256 task after assembleRelease
+tasks.whenTaskAdded {
+    if (name == "assembleRelease") {
+        finalizedBy("generateReleaseApkSha256")
+    }
 }
