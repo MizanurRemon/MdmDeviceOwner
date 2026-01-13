@@ -1,0 +1,15 @@
+{
+  "android.app.extra.PROVISIONING_MODE": "DEVICE_OWNER",
+
+  "android.app.extra.PROVISIONING_DEVICE_ADMIN_COMPONENT_NAME":
+  "com.remon.mdmdeviceowner/.DeviceAdminReceiver",
+
+  "android.app.extra.PROVISIONING_DEVICE_ADMIN_PACKAGE_DOWNLOAD_LOCATION":
+  "https://github.com/MizanurRemon/MDM/releases/download/v1.0.6/app-release.apk",
+
+  "android.app.extra.PROVISIONING_DEVICE_ADMIN_PACKAGE_CHECKSUM":
+  "af826784f88c07fa13465ff93734225c92038d56e286bdcdef5d9b6b9935b98c",
+
+  "android.app.extra.PROVISIONING_SKIP_ENCRYPTION": true,
+  "android.app.extra.PROVISIONING_LEAVE_ALL_SYSTEM_APPS_ENABLED": true
+}
