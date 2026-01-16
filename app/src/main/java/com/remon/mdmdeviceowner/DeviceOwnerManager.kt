@@ -9,7 +9,7 @@ class DeviceOwnerManager(private val context: Context) {
         context.getSystemService(Context.DEVICE_POLICY_SERVICE) as DevicePolicyManager
 
     private val adminComponent: ComponentName =
-        ComponentName(context, "com.remon.mdmdeviceowner.DeviceAdminReceiver")
+        ComponentName(context, "${context.packageName}.DeviceAdminReceiver")
 
     fun isDeviceOwner(): Boolean {
         return devicePolicyManager.isDeviceOwnerApp(context.packageName)

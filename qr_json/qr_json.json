@@ -2,13 +2,13 @@
   "android.app.extra.PROVISIONING_MODE": "DEVICE_OWNER",
 
   "android.app.extra.PROVISIONING_DEVICE_ADMIN_COMPONENT_NAME":
-  "com.remon.mdmdeviceowner/.DeviceAdminReceiver",
+  "com.remon.mdmdeviceowner/com.remon.mdmdeviceowner.DeviceAdminReceiver",
 
   "android.app.extra.PROVISIONING_DEVICE_ADMIN_PACKAGE_DOWNLOAD_LOCATION":
-  "https://github.com/MizanurRemon/MdmDeviceOwner/releases/download/v1.0/app-release.apk",
+  "https://smlocker.blob.core.windows.net/locker/app-release.apk",
 
   "android.app.extra.PROVISIONING_DEVICE_ADMIN_PACKAGE_CHECKSUM":
-  "6834901ae474802a436a9bfaa6f815068cda3e200f5ba08ab7e19e2d5088ef64",
+  "f492d053a0183af2f7a954a3492849a2680cc54347e161652cc9eb81a03c410d",
 
   "android.app.extra.PROVISIONING_SKIP_ENCRYPTION": true,
   "android.app.extra.PROVISIONING_LEAVE_ALL_SYSTEM_APPS_ENABLED": true

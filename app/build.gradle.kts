@@ -71,7 +71,7 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
 
-    implementation("androidx.enterprise:enterprise-feedback:1.1.0")
+    implementation(libs.androidx.enterprise.feedback)
 
 }
 
